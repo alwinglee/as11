@@ -1,0 +1,29 @@
+name: Assessing find_lowest_number.py and Test Files
+
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.x'
+    
+    - name: Test Case 1 - Multiple numbers
+      run: |
+        python3 find_lowest_number.py test_data/test1_input.txt output1.txt
+        diff test_data/test1_expected.txt output1.txt
+    
+    - name: Test Case 2 - Single number
+      run: |
+        python3 find_lowest_number.py test_data/test2_input.txt output2.txt
+        diff test_data/test2_expected.txt output2.txt
+    
+    - name: Test Case 3 - Blank file
+      run: |
+        python3 find_lowest_number.py test_data/test3_input.txt output3.txt
+        diff test_data/test3_expected.txt output3.txt
